@@ -9,6 +9,8 @@
 <body>
   <style>
     img.foto-teman { max-width: 150px; border: 1px solid #bbb; }
+    table#info tr#code td { text-align: center; }
+    table#info tr#expl td { padding: 0 0.5em; }
   </style>
   <div class="container mt-5">
     <div class="text-center">
@@ -16,7 +18,25 @@
       <h5>Sebuah Alternatif dari <a href="https://github.com/dayatura/TemanSeangkatan">Teman Angkatan</a></h5>
     </div>
 
-    <section class="mt-5 mb-2">
+    <section class="mt-3 mb-2 text-center">
+      <div class="d-inline-block border border-1 p-2">
+        <table id="info" class="m-auto">
+          <tr id="code">
+            <td>11</td>
+            <td>01</td>
+            <td>10</td>
+            <td>17</td>
+          </tr>
+          <tr id="expl">
+            <td>Kode fakultas</td>
+            <td>Kode jurusan</td>
+            <td><abbr title="Sarjana = 10, D4 = 04, Magister = 20, Doktor = 30, Profesi = 12, Spesialis I = 21, Spesialis II = 22">Kode jenjang</abbr></td>
+            <td>Tahun angkatan</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+    <section class="mb-2">
       <select class="form-control" id="codes">
         <option value="" disabled selected>Kode jurusan</option>
         <optgroup label="Hukum">
