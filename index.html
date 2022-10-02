@@ -16,11 +16,105 @@
       <h5>Sebuah Alternatif dari <a href="https://github.com/dayatura/TemanSeangkatan">Teman Angkatan</a></h5>
     </div>
 
-    <form id='input'>
-      <div class="text-center mt-5">
+    <section class="mt-5 mb-2">
+      <select class="form-control" id="codes">
+        <option value="" disabled selected>Kode jurusan</option>
+        <optgroup label="Hukum">
+          <option value="110110">Hukum</option>
+        </optgroup>
+        <optgroup label="Ekonomi dan Bisnis">
+          <option value="120104">Akuntansi Perpajakan</option>
+          <option value="120110">Akuntansi</option>
+          <option value="120210">Ekonomi Pembangunan</option>
+          <option value="120310">Manajemen</option>
+          <option value="120410">Ekonomi Islam</option>
+        </optgroup>
+        <optgroup label="Kedokteran">
+          <option value="130104">Kebidanan</option>
+          <option value="130110">Kedokteran</option>
+          <option value="130210">Kedokteran Hewan</option>
+        </optgroup>
+        <optgroup label="Matematika dan Ilmu Pengetahuan Alam">
+          <option value="140110">Matematika</option>
+          <option value="140210">Kimia</option>
+          <option value="140310">Fisika</option>
+          <option value="140410">Biologi</option>
+          <option value="140610">Statistika</option>
+          <option value="140710">Geofisika</option>
+          <option value="140810">Teknik Informatika</option>
+          <option value="140910">Teknik Elektro</option>
+        </optgroup>
+        <optgroup label="Pertanian">
+          <option value="150510">Agroteknologi</option>
+          <option value="150610">Agribisnis</option>
+        </optgroup>
+        <optgroup label="Kedokteran Gigi">
+          <option value="160110">Kedokteran Gigi</option>
+        </optgroup>
+        <optgroup label="Ilmu Sosial dan Ilmu Politik">
+          <option value="170104">Administrasi Publik</option>
+          <option value="170204">Administrasi Pemerintahan</option>
+          <option value="170210">Hubungan Internasional</option>
+          <option value="170310">Kesejahteraan Sosial</option>
+          <option value="170410">Ilmu Pemerintahan</option>
+          <option value="170510">Antropologi</option>
+          <option value="170610">Administrasi Bisnis</option>
+          <option value="170710">Sosiologi</option>
+          <option value="170810">Ilmu Politik</option>
+        </optgroup>
+        <optgroup label="Ilmu Budaya">
+          <option value="180104">Bahasa dan Budaya Tiongkok</option>
+          <option value="180110">Sastra Indonesia</option>
+          <option value="180210">Sastra Sunda</option>
+          <option value="180310">Sejarah</option>
+          <option value="180410">Sastra Inggris</option>
+          <option value="180510">Sastra Perancis</option>
+          <option value="180610">Sastra Jepang</option>
+          <option value="180710">Sastra Rusia</option>
+          <option value="180810">Sastra Jerman</option>
+          <option value="180910">Sastra Arab</option>
+        </optgroup>
+        <optgroup label="Psikologi">
+          <option value="190110">Psikologi</option>
+        </optgroup>
+        <optgroup label="Peternakan">
+          <option value="200110">Peternakan</option>
+        </optgroup>
+        <optgroup label="Ilmu Komunikasi">
+          <option value="210104">Manajemen Produksi Media</option>
+          <option value="210110">Ilmu Komunikasi</option>
+          <option value="210210">Ilmu Perpustakaan</option>
+          <option value="210310">Hubungan Masyarakat</option>
+          <option value="210410">Televisi dan Film</option>
+          <option value="210510">Manajemen Komunikasi</option>
+          <option value="210610">Jurnalistik</option>
+        </optgroup>
+        <optgroup label="Keperawatan">
+          <option value="220110">Keperawatan</option>
+        </optgroup>
+        <optgroup label="Perikanan dan Ilmu Kelautan">
+          <option value="230110">Perikanan</option>
+          <option value="230210">Ilmu Kelautan</option>
+        </optgroup>
+        <optgroup label="Teknologi Industri Pertanian">
+          <option value="240110">Teknik Pertanian</option>
+          <option value="240210">Teknologi Pangan</option>
+          <option value="240310">Teknologi Industri Pertanian</option>
+        </optgroup>
+        <optgroup label="Farmasi">
+          <option label="260110">Farmasi</option>
+        </optgroup>
+        <optgroup label="Teknik Geologi">
+          <option value="270110">Teknik Geologi</option>
+        </optgroup>
+      </select>
+    </section>
+
+    <form id="input">
+      <div class="text-center mb-4">
         <div class="row">
           <div class="col-md-10">
-            <input type="text" class="form-control mb-2" placeholder="Masukkan NPM" id="npm">
+            <input type="text" class="form-control mb-2" placeholder="Masukkan NPM di sini" id="npm">
           </div>
           <div class="col-md-2">
             <button type="submit" class="btn btn-primary btn-block mb-2">Go</button>
@@ -86,6 +180,12 @@
           }
         });
       }
+
+      $("select#codes").change(function () {
+        let currentNpm = $("input#npm").val();
+        currentNpm = $(this).val() + currentNpm.substr(6);
+        $("input#npm").val(currentNpm);
+      });
     });
   </script>
 </body>
