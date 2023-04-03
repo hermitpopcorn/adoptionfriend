@@ -244,13 +244,13 @@
           fetchImage(npm_depan, jurusan, tahun, id + 1);
         }).catch(function (err) {
           rejectCounter += 1;
-          if (rejectCounter <= 30) {
+          if (rejectCounter <= 100) {
             fetchImage(npm_depan, jurusan, tahun, id + 1);
             return;
           }
 
           let final = id;
-          for (id; id >= (final - 30); id--) {
+          for (id; id >= (final - 100); id--) {
             $(`div#teman-${id}`).remove();
           }
 
