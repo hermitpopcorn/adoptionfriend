@@ -8,7 +8,13 @@
 </head>
 <body>
   <style>
-    img.foto-teman { max-width: 150px; border: 1px solid #bbb; }
+    div.foto-teman {
+      width: 9rem;
+      height: 12rem;
+      border: 1px solid #bbb;
+      background-size: cover;
+      background-position: center;
+    }
     table#info tr#code td { text-align: center; }
     table#info tr#expl td { padding: 0 0.5em; }
   </style>
@@ -143,7 +149,7 @@
       </div>
     </form>
 
-    <div id="result-container" class="text-center">
+    <div id="result-container" class="text-center d-flex flex-wrap">
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -152,8 +158,8 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
   <script>
     $(function() {
-      $('#result-container').on('click', 'img.foto-teman', function (e) {
-        window.open($(e.target).prop('src'), '_blank');
+      $('#result-container').on('click', '.foto-teman', function (e) {
+        window.open($(e.target).data('url'), '_blank');
       });
 
       $('form#input').submit(function (e) {
@@ -174,19 +180,21 @@
 
       function fetchImage(npm_depan, jurusan, tahun, id) {
         return new Promise(function (fulfill, reject) {
-          var id_str = "" + id;
-          npm_belakang = "000".substring(id_str.length) + id_str;
+          let id_str = "" + id;
+          let npm_belakang = "000".substring(id_str.length) + id_str;
 
-          url = 'https://media.unpad.ac.id/photo/mahasiswa/' + jurusan + '/' + tahun + '/' + npm_depan + npm_belakang + '.JPG';
+          let url = 'https://media.unpad.ac.id/photo/mahasiswa/' + jurusan + '/' + tahun + '/' + npm_depan + npm_belakang + '.JPG';
 
-          $('#result-container').append('<img src="'+url+'" class="foto-teman" rel="noreferrer" id="teman-' + id + '" title="' + npm_depan + npm_belakang + '">');
-          $('img#teman-' + id)
+          $('<img/>').attr('src', url)
           .on('load', function () {
-            $('img#teman-' + id).tooltip();
+            $(this).remove();
+            $('#result-container').append('<div style="background-image: url(\''+url+'\')" class="foto-teman" rel="noreferrer" id="teman-' + id + '" title="' + npm_depan + npm_belakang + '" data-url="' + url + '">');
+            $('div#teman-' + id).tooltip();
             fulfill(id);
           })
           .on('error', function () {
-            $('img#teman-' + id).remove();
+            $(this).remove();
+            $('#result-container').append('<div style="background-color: #ececec" class="foto-teman" rel="noreferrer" id="teman-' + id + '" title="' + npm_depan + npm_belakang + '" data-url="' + url + '">');
             reject(id);
           });
         })
