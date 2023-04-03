@@ -218,10 +218,10 @@
         });
       }
 
-      $("select#codes").change(function () {
-        let currentNpm = $("input#npm").val();
+      $('select#codes').change(function () {
+        let currentNpm = $('input#npm').val();
         currentNpm = $(this).val() + currentNpm.substr(6);
-        $("input#npm").val(currentNpm);
+        $('input#npm').val(currentNpm);
       });
     });
   </script>
