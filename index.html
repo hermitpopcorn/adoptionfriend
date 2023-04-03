@@ -139,8 +139,20 @@
     <form id="input">
       <div class="text-center mb-4">
         <div class="row">
-          <div class="col-md-10">
+          <div class="col-md-6">
             <input type="text" class="form-control mb-2" placeholder="Masukkan NPM di sini" id="npm">
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="pt-2">
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="mode" id="mode-a" checked>
+                <label class="form-check-label" for="mode-a">Waku Waku Ichinensei</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="mode" id="mode-b">
+                <label class="form-check-label" for="mode-b">Sakura Bye Bye</label>
+              </div>
+            </div>
           </div>
           <div class="col-md-2">
             <button type="submit" class="btn btn-primary btn-block mb-2">Go</button>
@@ -181,12 +193,21 @@
         fetchImage(npm_depan, jurusan, tahun, 1);
       });
 
+      function getImageUrl(jurusan, tahun, npm_depan, npm_belakang) {
+        if ($('#mode-a').prop('checked')) {
+          return `https://media.unpad.ac.id/photo/mahasiswa/${jurusan}/${tahun}/${npm_depan}${npm_belakang}.JPG`;
+        }
+        if ($('#mode-b').prop('checked')) {
+          return `http://media.unpad.ac.id/photo/alumni/${jurusan}/${tahun}/${npm_depan}${npm_belakang}.jpg`;
+        }
+      }
+
       function fetchImage(npm_depan, jurusan, tahun, id) {
         return new Promise(function (fulfill, reject) {
           let id_str = "" + id;
           let npm_belakang = "000".substring(id_str.length) + id_str;
 
-          let url = `https://media.unpad.ac.id/photo/mahasiswa/${jurusan}/${tahun}/${npm_depan}${npm_belakang}.JPG`;
+          let url = getImageUrl(jurusan, tahun, npm_depan, npm_belakang);
 
           $('<img/>').attr('src', url)
           .on('load', function () {
