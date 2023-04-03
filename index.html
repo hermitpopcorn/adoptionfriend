@@ -155,13 +155,13 @@
             </div>
           </div>
           <div class="col-md-2">
-            <button type="submit" class="btn btn-primary btn-block mb-2">Go</button>
+            <button type="submit" id="go-button" class="btn btn-primary btn-block mb-2">Go</button>
           </div>
         </div>
       </div>
     </form>
 
-    <div id="result-container" class="text-center d-flex flex-wrap">
+    <div id="result-container" class="text-center d-flex flex-wrap pb-5">
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -170,6 +170,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
   <script>
     var rejectCounter = 0;
+    var running = false;
 
     $(function() {
       $('#result-container').on('click', '.foto-teman', function (e) {
@@ -178,6 +179,12 @@
 
       $('form#input').submit(function (e) {
         e.preventDefault();
+
+        if (running) {
+          return;
+        }
+        setRunning(true);
+
         $('#result-container').html('');
 
         var npm = $('input#npm').val();
@@ -202,8 +209,18 @@
         }
       }
 
+      function setRunning(to) {
+        if (to) {
+          running = true;
+          $('#go-button').prop('disabled', true);
+        } else {
+          running = false;
+          $('#go-button').prop('disabled', false);
+        }
+      }
+
       function fetchImage(npm_depan, jurusan, tahun, id) {
-        return new Promise(function (fulfill, reject) {
+        currentPromise = new Promise(function (fulfill, reject) {
           let id_str = "" + id;
           let npm_belakang = "000".substring(id_str.length) + id_str;
 
@@ -236,6 +253,8 @@
           for (id; id >= (final - 30); id--) {
             $(`div#teman-${id}`).remove();
           }
+
+          setRunning(false);
         });
       }
 
