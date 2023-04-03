@@ -186,18 +186,18 @@
           let id_str = "" + id;
           let npm_belakang = "000".substring(id_str.length) + id_str;
 
-          let url = 'https://media.unpad.ac.id/photo/mahasiswa/' + jurusan + '/' + tahun + '/' + npm_depan + npm_belakang + '.JPG';
+          let url = `https://media.unpad.ac.id/photo/mahasiswa/${jurusan}/${tahun}/${npm_depan}${npm_belakang}.JPG`;
 
           $('<img/>').attr('src', url)
           .on('load', function () {
             $(this).remove();
-            $('#result-container').append('<div style="background-image: url(\''+url+'\')" class="foto-teman" rel="noreferrer" id="teman-' + id + '" title="' + npm_depan + npm_belakang + '" data-url="' + url + '">');
-            $('div#teman-' + id).tooltip();
+            $('#result-container').append(`<div style="background-image: url(\'${url}\')" class="foto-teman" rel="noreferrer" id="teman-${id}" title="${npm_depan}${npm_belakang}" data-url="${url}">`);
+            $(`div#teman-${id}`).tooltip();
             fulfill(id);
           })
           .on('error', function () {
             $(this).remove();
-            $('#result-container').append('<div style="background-color: #ececec" class="foto-teman" rel="noreferrer" id="teman-' + id + '" title="' + npm_depan + npm_belakang + '" data-url="' + url + '">');
+            $('#result-container').append(`<div style="background-color: #ececec" class="foto-teman" rel="noreferrer" id="teman-${id}" title="${npm_depan}${npm_belakang}" data-url="${url}">`);
             reject(id);
           });
         })
@@ -213,7 +213,7 @@
 
           let final = id;
           for (id; id >= (final - 30); id--) {
-            $('div#teman-' + id).remove();
+            $(`div#teman-${id}`).remove();
           }
         });
       }
